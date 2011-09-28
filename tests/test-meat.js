@@ -42,4 +42,31 @@ module.exports = testCase({
 
     assert.done();
   },
+  "test data emits": function(assert) {
+    assert.expect(6);
+    var count = 0;
+    var stream = QueueStream();
+
+    stream.on('error', function(err) {
+      console.log('err: ' + err);
+    });
+
+    function dataCb(data) {
+      var str = data.toString();
+      assert.ok((str == 'Hello\n' || str == 'World\n'));
+
+      if (++count == 6) assert.done();
+    }
+
+    stream.on('data', dataCb);
+    stream.on('data', dataCb);
+    stream.on('data', dataCb);
+
+    var test1 = fs.createReadStream(__dirname + '/files/test1.txt');
+    stream.queue(test1);
+    var test2 = fs.createReadStream(__dirname + '/files/test2.txt');
+    stream.queue(test2);
+
+    stream.startNext();
+  }
 });
