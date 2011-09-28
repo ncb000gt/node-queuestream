@@ -1,0 +1,12 @@
+{
+  "name": "queuestream",
+  "version": "0.0.1",
+  "description": "Queue Streams",
+  "keywords": ["queue", "stream", "streams"],
+  "scripts": {
+    "test": "make test"
+  },
+  "devDependencies": {
+    "nodeunit": ">=0.5.4"
+  }
+}
