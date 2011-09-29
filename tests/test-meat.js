@@ -141,7 +141,7 @@ module.exports = testCase({
     stream.startNext();
   },
   "test next": function(assert) {
-    assert.expect(1);
+    assert.expect(6);
     var count = 0;
     var stream = QueueStream();
 
@@ -153,6 +153,18 @@ module.exports = testCase({
     stream.next();
     var current = stream.getCurrent();
     assert.deepEqual(current, test1);
+
+    var endListeners = current.listeners("end");
+    var dataListeners = current.listeners("data");
+    var errorListeners = current.listeners("error");
+    var pauseListeners = current.listeners("pause");
+    var resumeListeners = current.listeners("resume");
+
+    assert.equal(endListeners.length, 1);
+    assert.equal(dataListeners.length, 1);
+    assert.equal(errorListeners.length, 1);
+    assert.equal(pauseListeners.length, 1);
+    assert.equal(resumeListeners.length, 1);
 
     assert.done();
   }
