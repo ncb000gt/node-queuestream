@@ -1,8 +1,15 @@
 {
   "name": "queuestream",
   "version": "0.0.1",
+  "author": "Nick Campbell (http://github.com/ncb000gt)",
   "description": "Queue Streams",
   "keywords": ["queue", "stream", "streams"],
+  "repository": {
+        "type": "git",
+        "url": "http://github.com/ncb000gt/node-queuestream.git"
+   },
+   "licenses": [{"type": "MIT"}],
+   "bugs": {"web" : "http://github.com/ncb000gt/node-queuestream/issues"},
   "scripts": {
     "test": "make test"
   },
