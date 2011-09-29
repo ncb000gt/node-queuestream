@@ -3,6 +3,49 @@ var testCase = require('nodeunit').testCase,
     QueueStream = require('../lib/queuestream').QueueStream;
 
 module.exports = testCase({
+  "test injecting": function(assert) {
+    var stream = QueueStream();
+    var test1 = fs.createReadStream(__dirname + '/files/test1.txt');
+    var test2 = fs.createReadStream(__dirname + '/files/test2.txt');
+    stream.queue(test2);
+    stream.inject(test1);
+
+    assert.equal(stream.length(), 2);
+
+    var queue = stream.getQueue();
+    assert.deepEqual(queue[0], test1);
+    assert.deepEqual(queue[1], test2);
+
+    assert.done();
+  },
+  "test injecting nothing": function(assert) {
+    var stream = QueueStream();
+    stream.inject();
+
+    assert.equal(stream.length(), 0);
+
+    var queue = stream.getQueue();
+    assert.equal(queue.length, 0);
+
+    assert.done();
+  },
+  "test injecting array": function(assert) {
+    var stream = QueueStream();
+    var test0 = fs.createReadStream(__dirname + '/files/test1.txt');
+    var test1 = fs.createReadStream(__dirname + '/files/test1.txt');
+    var test2 = fs.createReadStream(__dirname + '/files/test2.txt');
+    stream.queue(test0);
+    stream.inject([test1, test2]);
+
+    assert.equal(stream.length(), 3);
+
+    var queue = stream.getQueue();
+    assert.equal(queue.length, 3);
+    assert.deepEqual(queue[0], test1);
+    assert.deepEqual(queue[1], test2);
+
+    assert.done();
+  },
   "test queuing": function(assert) {
     var stream = QueueStream();
     var test1 = fs.createReadStream(__dirname + '/files/test1.txt');
@@ -17,7 +60,6 @@ module.exports = testCase({
   },
   "test queuing nothing": function(assert) {
     var stream = QueueStream();
-    var test1 = fs.createReadStream(__dirname + '/files/test1.txt');
     stream.queue();
 
     assert.equal(stream.length(), 0);
@@ -29,16 +71,18 @@ module.exports = testCase({
   },
   "test queuing array": function(assert) {
     var stream = QueueStream();
+    var test0 = fs.createReadStream(__dirname + '/files/test1.txt');
     var test1 = fs.createReadStream(__dirname + '/files/test1.txt');
     var test2 = fs.createReadStream(__dirname + '/files/test2.txt');
+    stream.queue(test0);
     stream.queue([test1, test2]);
 
-    assert.equal(stream.length(), 2);
+    assert.equal(stream.length(), 3);
 
     var queue = stream.getQueue();
-    assert.equal(queue.length, 2);
-    assert.deepEqual(queue[0], test1);
-    assert.deepEqual(queue[1], test2);
+    assert.equal(queue.length, 3);
+    assert.deepEqual(queue[1], test1);
+    assert.deepEqual(queue[2], test2);
 
     assert.done();
   },
