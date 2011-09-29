@@ -68,5 +68,32 @@ module.exports = testCase({
     stream.queue(test2);
 
     stream.startNext();
+  },
+  "test data emits with small buffers": function(assert) {
+    assert.expect(12);
+    var count = 0;
+    var stream = QueueStream();
+
+    stream.on('error', function(err) {
+      console.log('err: ' + err);
+    });
+
+    function dataCb(data) {
+      var str = data.toString();
+      assert.ok(str == 'He' || str == 'll' || str == 'o\n' || str == 'World\n');
+
+      if (++count == 12) assert.done();
+    }
+
+    stream.on('data', dataCb);
+    stream.on('data', dataCb);
+    stream.on('data', dataCb);
+
+    var test1 = fs.createReadStream(__dirname + '/files/test1.txt', {bufferSize: 2});
+    stream.queue(test1);
+    var test2 = fs.createReadStream(__dirname + '/files/test2.txt');
+    stream.queue(test2);
+
+    stream.startNext();
   }
 });
