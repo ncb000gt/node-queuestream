@@ -139,5 +139,21 @@ module.exports = testCase({
     stream.queue(test2);
 
     stream.startNext();
+  },
+  "test next": function(assert) {
+    assert.expect(1);
+    var count = 0;
+    var stream = QueueStream();
+
+    var test1 = fs.createReadStream(__dirname + '/files/test1.txt');
+    stream.queue(test1);
+    var test2 = fs.createReadStream(__dirname + '/files/test2.txt');
+    stream.queue(test2);
+
+    stream.next();
+    var current = stream.getCurrent();
+    assert.deepEqual(current, test1);
+
+    assert.done();
   }
 });
