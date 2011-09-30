@@ -4,7 +4,7 @@ var testCase = require('nodeunit').testCase,
 
 module.exports = testCase({
   "test length": function(assert) {
-    var stream = QueueStream();
+    var stream = new QueueStream();
     var test1 = fs.createReadStream(__dirname + '/files/test1.txt');
     stream.queue(test1);
     var test2 = fs.createReadStream(__dirname + '/files/test2.txt');
@@ -15,7 +15,7 @@ module.exports = testCase({
     assert.done();
   },
   "test current": function(assert) {
-    var stream = QueueStream();
+    var stream = new QueueStream();
     var test1 = fs.createReadStream(__dirname + '/files/test1.txt');
     stream.queue(test1);
     var test2 = fs.createReadStream(__dirname + '/files/test2.txt');
@@ -29,7 +29,7 @@ module.exports = testCase({
     assert.done();
   },
   "test queue": function(assert) {
-    var stream = QueueStream();
+    var stream = new QueueStream();
     var test1 = fs.createReadStream(__dirname + '/files/test1.txt');
     stream.queue(test1);
     var test2 = fs.createReadStream(__dirname + '/files/test2.txt');

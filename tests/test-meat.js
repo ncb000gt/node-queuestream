@@ -4,7 +4,7 @@ var testCase = require('nodeunit').testCase,
 
 module.exports = testCase({
   "test injecting": function(assert) {
-    var stream = QueueStream();
+    var stream = new QueueStream();
     var test1 = fs.createReadStream(__dirname + '/files/test1.txt');
     var test2 = fs.createReadStream(__dirname + '/files/test2.txt');
     stream.queue(test2);
@@ -19,7 +19,7 @@ module.exports = testCase({
     assert.done();
   },
   "test injecting nothing": function(assert) {
-    var stream = QueueStream();
+    var stream = new QueueStream();
     stream.inject();
 
     assert.equal(stream.length(), 0);
@@ -30,7 +30,7 @@ module.exports = testCase({
     assert.done();
   },
   "test injecting array": function(assert) {
-    var stream = QueueStream();
+    var stream = new QueueStream();
     var test0 = fs.createReadStream(__dirname + '/files/test1.txt');
     var test1 = fs.createReadStream(__dirname + '/files/test1.txt');
     var test2 = fs.createReadStream(__dirname + '/files/test2.txt');
@@ -47,7 +47,7 @@ module.exports = testCase({
     assert.done();
   },
   "test queuing": function(assert) {
-    var stream = QueueStream();
+    var stream = new QueueStream();
     var test1 = fs.createReadStream(__dirname + '/files/test1.txt');
     stream.queue(test1);
 
@@ -59,7 +59,7 @@ module.exports = testCase({
     assert.done();
   },
   "test queuing nothing": function(assert) {
-    var stream = QueueStream();
+    var stream = new QueueStream();
     stream.queue();
 
     assert.equal(stream.length(), 0);
@@ -70,7 +70,7 @@ module.exports = testCase({
     assert.done();
   },
   "test queuing array": function(assert) {
-    var stream = QueueStream();
+    var stream = new QueueStream();
     var test0 = fs.createReadStream(__dirname + '/files/test1.txt');
     var test1 = fs.createReadStream(__dirname + '/files/test1.txt');
     var test2 = fs.createReadStream(__dirname + '/files/test2.txt');
@@ -89,7 +89,7 @@ module.exports = testCase({
   "test data emits": function(assert) {
     assert.expect(6);
     var count = 0;
-    var stream = QueueStream();
+    var stream = new QueueStream();
 
     stream.on('error', function(err) {
       console.log('err: ' + err);
@@ -116,7 +116,7 @@ module.exports = testCase({
   "test data emits with small buffers": function(assert) {
     assert.expect(12);
     var count = 0;
-    var stream = QueueStream();
+    var stream = new QueueStream();
 
     stream.on('error', function(err) {
       console.log('err: ' + err);
@@ -143,7 +143,7 @@ module.exports = testCase({
   "test next": function(assert) {
     assert.expect(6);
     var count = 0;
-    var stream = QueueStream();
+    var stream = new QueueStream();
 
     var test1 = fs.createReadStream(__dirname + '/files/test1.txt');
     stream.queue(test1);

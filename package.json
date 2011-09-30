@@ -1,6 +1,6 @@
 {
   "name": "queuestream",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "Nick Campbell (http://github.com/ncb000gt)",
   "description": "Queue streams for sequential streaming.",
   "main": "./lib/queuestream",
