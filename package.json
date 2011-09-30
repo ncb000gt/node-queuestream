@@ -1,6 +1,6 @@
 {
   "name": "queuestream",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "Nick Campbell (http://github.com/ncb000gt)",
   "description": "Queue streams for sequential streaming.",
   "main": "./lib/queuestream",
@@ -15,7 +15,7 @@
     "test": "make test"
   },
   "dependencies": {
-    "eventemitter2": "=0.4.2"
+    "eventemitter2": ">=0.4.0"
   },
   "devDependencies": {
     "nodeunit": ">=0.5.4"
