@@ -1,6 +1,8 @@
 queuestream
 ========
 
+[![Build Status](https://travis-ci.org/ncb000gt/node-queuestream.png)](https://travis-ci.org/ncb000gt/node-queuestream)
+
 This is a quick little library I wrote to queue up streams for playback.
 
 For instance, if you want to have multiple listeners on a signle streaming server this will update the stream behind the scenes and send data up to the listeners when data on the new "current" stream exists.
